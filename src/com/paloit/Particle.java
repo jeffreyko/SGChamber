@@ -26,8 +26,6 @@ public class Particle {
 	
 	public void move(int speed) {
 		location = isLeft?location-speed:location+speed;
-		
 	}
-	
-	
+
 }

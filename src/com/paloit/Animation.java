@@ -32,11 +32,27 @@ public class Animation {
 			}
 		}
 		
-		resultAtAllTimes.add(print(chamber, init.length()));
+		int initNumberOfParticles=chamber.size();
+		int outRangeCount=0;
 
-		while(stillNeedToPrint(chamber, init.length())) {
-			chamber.forEach(p -> p.move(speed));
-			chamber.removeIf((Particle p) -> (p.getLocation() < 0 || p.getLocation()>=init.length()));
+		resultAtAllTimes.add(print(chamber, init.length()));
+		
+		while(outRangeCount<initNumberOfParticles) {
+			//chamber.forEach(p -> p.move(speed));
+			//chamber.stream().forEach(p -> p.move(speed));
+			
+			List<Particle> tempC = new ArrayList<>();
+			for (Particle p:chamber) {
+				p.move(speed);
+				if (p.getLocation()<0 || p.getLocation()>=init.length()) {
+					outRangeCount++;
+					tempC.add(p);
+				}
+			}
+			
+			chamber.removeAll(tempC);
+			
+			//chamber.removeIf((Particle p) -> (p.getLocation() < 0 || p.getLocation()>=init.length()));
 			resultAtAllTimes.add(print(chamber, init.length()));
 		}
 		
@@ -44,19 +60,10 @@ public class Animation {
 		
 	}
 	
-	private static boolean stillNeedToPrint(Set<Particle> chamber, int initConditionLength) {	
-		for (Particle p:chamber) {
-			if (!(p.getLocation()<0 || p.getLocation()>=initConditionLength)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 	private static String print(Set<Particle> chamber, int initLength) {
 		Set<Integer> chamberResultPosition = new HashSet<>();
-		chamber.forEach(p -> chamberResultPosition.add(p.getLocation()));
+		chamber.stream().forEach(p -> chamberResultPosition.add(p.getLocation()));
 		
 		StringBuilder sBuilder = new StringBuilder();
 		for (int i=0; i<initLength; i++) {
