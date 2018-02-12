@@ -1,9 +1,9 @@
 package com.paloit;
 
 public class Particle {
-	private int location;
 	private boolean isLeft;
-	
+	private int location;
+
 	public Particle(boolean isLeft, int location) {
 		this.isLeft = isLeft;
 		this.location = location;
