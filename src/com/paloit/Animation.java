@@ -6,21 +6,21 @@ import java.util.List;
 import java.util.Set;
 
 /**
-* 
+*
 * This Animation program animates a particle rolling in a particle chamber
 *
 * @author  Jeffrey
 * @version 1.0
-* @since   2018-02-12 
+* @since   2018-02-12
 */
 public class Animation {
-	
+
    /**
    * This is the main method which makes use of animate method.
    * @param speed speed of particle
    * @param init initial condition of particles in chamber
    * @return a list of locations at each time instance
-   * 
+   *
    */
 	public static List<String> animate(int speed, String init) {
 		List<String> resultAtAllTimes = new ArrayList<>();
@@ -31,16 +31,16 @@ public class Animation {
 				chamber.add(new Particle(c==('L'),i));
 			}
 		}
-		
+
 		int initNumberOfParticles=chamber.size();
 		int outRangeCount=0;
 
 		resultAtAllTimes.add(print(chamber, init.length()));
-		
+
 		while(outRangeCount<initNumberOfParticles) {
 			//chamber.forEach(p -> p.move(speed));
 			//chamber.stream().forEach(p -> p.move(speed));
-			
+
 			List<Particle> tempC = new ArrayList<>();
 			for (Particle p:chamber) {
 				p.move(speed);
@@ -49,29 +49,29 @@ public class Animation {
 					tempC.add(p);
 				}
 			}
-			
+
 			chamber.removeAll(tempC);
-			
+
 			//chamber.removeIf((Particle p) -> (p.getLocation() < 0 || p.getLocation()>=init.length()));
 			resultAtAllTimes.add(print(chamber, init.length()));
 		}
-		
+
 		return resultAtAllTimes;
-		
+
 	}
-	
+
 
 	private static String print(Set<Particle> chamber, int initLength) {
 		Set<Integer> chamberResultPosition = new HashSet<>();
 		chamber.stream().forEach(p -> chamberResultPosition.add(p.getLocation()));
-		
+
 		StringBuilder sBuilder = new StringBuilder();
 		for (int i=0; i<initLength; i++) {
 			sBuilder.append(chamberResultPosition.contains(i) ? 'X':'.');
 		}
-		
+
 		return sBuilder.toString();
-		
+
 	}
 
    /**
@@ -84,15 +84,13 @@ public class Animation {
 		if (speed<1 || speed>10) {
 			throw new Exception("First argument should be between 1 and 10 inclusive");
 		}
-		
+
 		String init = args[1];
 		if (init.length()<1 || init.length()>50) {
 			throw new Exception("Second argument should contain between 1 and 50 characters inclusive");
 		}
-		
+
 		animate(speed,init).forEach(line -> System.out.println(line));
 		//animate(1,"LRRL.LR.LRR.R.LRRL.").forEach(line -> System.out.println(line));
-		//animate(2,"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL").forEach(line -> System.out.println(line));
 	}
-
 }
