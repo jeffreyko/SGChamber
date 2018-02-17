@@ -32,12 +32,13 @@ public class Animation {
 			}
 		}
 
-		int initNumberOfParticles=chamber.size();
-		int outRangeCount=0;
+//		int initNumberOfParticles=chamber.size();
+//		int outRangeCount=0;
 
 		resultAtAllTimes.add(print(chamber, init.length()));
 
-		while(outRangeCount<initNumberOfParticles) {
+		//while(outRangeCount<initNumberOfParticles) {
+		while(!chamber.isEmpty()) {
 			//chamber.forEach(p -> p.move(speed));
 			//chamber.stream().forEach(p -> p.move(speed));
 
@@ -45,7 +46,7 @@ public class Animation {
 			for (Particle p:chamber) {
 				p.move(speed);
 				if (p.getLocation()<0 || p.getLocation()>=init.length()) {
-					outRangeCount++;
+//					outRangeCount++;
 					tempC.add(p);
 				}
 			}
@@ -90,7 +91,13 @@ public class Animation {
 			throw new Exception("Second argument should contain between 1 and 50 characters inclusive");
 		}
 
-		animate(speed,init).forEach(line -> System.out.println(line));
-		//animate(1,"LRRL.LR.LRR.R.LRRL.").forEach(line -> System.out.println(line));
+		//animate(speed,init).forEach(line -> System.out.println(line));
+		
+		animate(1,"LRRL.LR.LRR.R.LRRL.").forEach(line -> System.out.println(line));
+		
+		//List<String> myList = animate(speed,init);
+		//myList = s -> System.out.println(s);
+		
+		
 	}
 }
