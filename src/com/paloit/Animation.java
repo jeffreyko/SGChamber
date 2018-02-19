@@ -32,21 +32,13 @@ public class Animation {
 			}
 		}
 
-//		int initNumberOfParticles=chamber.size();
-//		int outRangeCount=0;
-
 		resultAtAllTimes.add(print(chamber, init.length()));
 
-		//while(outRangeCount<initNumberOfParticles) {
 		while(!chamber.isEmpty()) {
-			//chamber.forEach(p -> p.move(speed));
-			//chamber.stream().forEach(p -> p.move(speed));
-
 			List<Particle> tempC = new ArrayList<>();
 			for (Particle p:chamber) {
 				p.move(speed);
 				if (p.getLocation()<0 || p.getLocation()>=init.length()) {
-//					outRangeCount++;
 					tempC.add(p);
 				}
 			}
