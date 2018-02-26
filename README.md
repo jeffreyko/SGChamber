@@ -8,3 +8,9 @@ Second: initial condition of particles
 ## Dependencies
 
 Java 1.8
+
+##Command-line Instructions
+
+$ cd SGChamber/src
+$ javac ./com/paloit/*.java
+$ java com.paloit.Animation 10 LLLLLL
