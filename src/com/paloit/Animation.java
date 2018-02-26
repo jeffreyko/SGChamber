@@ -73,23 +73,24 @@ public class Animation {
    * @exception Any exception.
    */
 	public static void main(String[] args) throws Exception {
-		int speed = Integer.parseInt(args[0]);
-		if (speed<1 || speed>10) {
-			throw new Exception("First argument should be between 1 and 10 inclusive");
-		}
+		try {
+			int speed = Integer.parseInt(args[0]);
+			if (speed<1 || speed>10) {
+				throw new Exception("First argument should be between 1 and 10 inclusive");
+			}
 
-		String init = args[1];
-		if (init.length()<1 || init.length()>50) {
-			throw new Exception("Second argument should contain between 1 and 50 characters inclusive");
-		}
+			String init = args[1];
+			if (init.length()<1 || init.length()>50) {
+				throw new Exception("Second argument should contain between 1 and 50 characters inclusive");
+			}
 
-		//animate(speed,init).forEach(line -> System.out.println(line));
-		
-		animate(1,"LRRL.LR.LRR.R.LRRL.").forEach(line -> System.out.println(line));
-		
-		//List<String> myList = animate(speed,init);
-		//myList = s -> System.out.println(s);
-		
+			animate(speed,init).forEach(line -> System.out.println(line));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// if input has any error, simply run a test case here
+			animate(1,"LRRL.LR.LRR.R.LRRL.").forEach(line -> System.out.println(line));
+		}
 		
 	}
 }
